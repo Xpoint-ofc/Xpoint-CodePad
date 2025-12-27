@@ -1,0 +1,149 @@
+<div hidden>
+  <h2> 
+  * Create By Dinz-Xpoint
+  * Contact Me on wa.me/6281325168437</h2>
+  <p>jangan di hapus entar eror</p>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xpoint-CodePad - Pro Edition</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #10101c;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 15px;
+        }
+
+        /* Sehemu ya Editor */
+        .editor-panel {
+            background: #282a36;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #444;
+        }
+
+        label {
+            display: block;
+            background: #343746;
+            padding: 8px 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px; /* Urefu wa kutosha kuandika */
+            padding: 15px;
+            background: transparent;
+            color: #f8f8f2;
+            border: none;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            resize: vertical; /* Inaruhusu mtumiaji kuvuta sanduku chini */
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        /* SEHEMU YA OUTPUT - HAPA NDIPO KUNA MABADILIKO */
+        .output-container {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            border: 3px solid #00d4ff;
+            /* Inafanya sehemu ya matokeo kutanuka kulingana na mradi */
+            min-height: 500px; 
+            height: auto;
+            display: flex;
+        }
+
+        iframe {
+            width: 100%;
+            border: none;
+            /* Inahakikisha iframe inachukua urefu wa kile kilichomo */
+            min-height: 500px;
+        }
+
+        @media (min-width: 1024px) {
+            .container { flex-direction: row; flex-wrap: wrap; }
+            .editor-panel { flex: 1 1 30%; }
+            .output-container { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Xpoint-CodePad</h1>
+    </div>
+
+    <div class="container">
+        <div class="editor-panel">
+            <label>HTML</label>
+            <textarea id="html-code" spellcheck="false" onkeyup="runCode()"></textarea>
+        </div>
+        <div class="editor-panel">
+            <label>CSS</label>
+            <textarea id="css-code" spellcheck="false" onkeyup="runCode()"></textarea>
+        </div>
+        <div class="editor-panel">
+            <label>JAVASCRIPT</label>
+            <textarea id="js-code" spellcheck="false" onkeyup="runCode()"></textarea>
+        </div>
+
+        <div class="output-container">
+            <iframe id="output"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function runCode() {
+            const html = document.getElementById('html-code').value;
+            const css = "<style>" + document.getElementById('css-code').value + "</style>";
+            const js = "<script>" + document.getElementById('js-code').value + "<\/script>";
+            const output = document.getElementById('output');
+            
+            const doc = output.contentWindow.document;
+            doc.open();
+            doc.write(html + css + js);
+            doc.close();
+
+            // Automatic adjustment of height
+            output.style.height = doc.body.scrollHeight + 'px';
+        }
+    </script>
+</body>
+</html>
